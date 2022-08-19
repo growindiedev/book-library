@@ -6,12 +6,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>Odin Library</title>
+  <script src="index.js" defer></script>
 </head>
 <body class="conatiner">
   <div class="nav">
     <h1>Gutenberg Library</h1>
   </div>
   <div class="content">
+    <div class="btn-container">
+
+      <!-- <div class="popover popover--active">
+        <button class="popover__trigger">More actions</button>
+        <ul class="popover__menu">
+          <li class="popover__menu-item"><button>Action with a long title</button></li>
+          <li class="popover__menu-item"><button>Delete</button></li>
+        </ul>
+      </div> -->
+      
+      <div class="popover">
+        <button class="popover__trigger">Add Book</button>
+        <div class="popover__menu">
+          <form class="popover__menu-item" id="myForm">
+            <input class="inp" type="text" id="title" name="title" placeholder="Title" required>
+            <input class="inp" type="text" id="author" name="author" placeholder="Author" required>
+            <input class="inp" type="number" id="pages" name="pages" placeholder="Pages">
+            <div>
+              <label for="read">Read the book?</label>
+              <input type="checkbox" id="read" name="read" value="read">
+            </div>
+            <button id="formSent">Submit</button>
+          </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="grid-container">
+    </div>
+
   </div>
   <div class="footer">
     created by jarryingnut

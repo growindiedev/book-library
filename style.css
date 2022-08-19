@@ -42,17 +42,123 @@ h1 {
 }
 
 .content {
-    /* border: 1px solid blueviolet */
+    /* border: 5px solid #fa3a6d; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.footer {
-  text-align: center;
-  font-size: 1.25rem;
+.btn-container {
+  grid-column: 1 / -1;
+  height: 5rem;
+  /* border: 1px solid blueviolet; */
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: var(--shadow);
+  
 }
+
+  .popover {
+    display: block;
+    position: relative;
+    /* border: 1px solid blue; */
+  }
+
+  .popover .popover__trigger {
+    /* z-index: 50; */
+  }
+  
+  .popover__menu {
+    border-radius: 4px;
+    border-top: 2px solid #49c5b6;
+    background: #fff;
+    list-style-type: none;
+    margin: 8px 0;
+    min-width: 100%;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: 150%;
+    left: -150%;
+    box-shadow: 0 2px 3px 0 rgba(63, 63, 68, 0.2);
+    transition-property: transform, opacity;
+    transition-duration: 200ms;
+    transition-timing-function: ease;
+    transform: scale(0.9);
+    transform-origin: top left;
+    display: block;
+    opacity: 0;
+  }
+
+  .popover__menu:after {
+    bottom: 100%;
+    left: 0.5rem;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    /* border-bottom-color: #49c5b6; */
+    border-width: 7px;
+  }
+  .popover__menu-item {
+    white-space: nowrap;
+    display: grid;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  form > input {
+    padding: 3px;
+  }
+  /* .popover__menu-item button {
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+    text-align: left;
+  }
+  .popover__menu-item button:hover, .popover__menu-item button:focus {
+    background-color: #f1f1f1;
+  } */
+
+  .popover--active .popover__menu {
+    transform: scale(2);
+    display: block;
+    opacity: 1;
+  }
+
+  button {
+    border-color: #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .grid-item {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid red;
+  }
+
+
+
+  .footer {
+    text-align: center;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--shadow);
+  }
+  
 
 
 
