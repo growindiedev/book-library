@@ -1,14 +1,17 @@
 var popover = document.querySelector(".popover");
 var popoverTrigger = document.querySelector(".popover__trigger");
+var form = document.getElementById("myForm");
 
 popoverTrigger.addEventListener("click", function (event) {
   closeAllOthers(this.parentElement);
+  // form.removeAttribute("disabled");
   this.parentElement.classList.toggle("popover--active");
 });
 
 function closeAllOthers(ignore) {
   if (popover !== ignore) {
     popover.classList.remove("popover--active");
+    // form.setAttribute("disabled");
   }
 }
 
@@ -43,19 +46,28 @@ Book.prototype.info = function () {
 
 let values = [];
 function addBookToLibrary(e) {
-  e.preventDefault();
-  document.querySelectorAll("input").forEach((item) => values.push(item.value));
-  values.push(document.querySelector("input[type='checkbox']").checked);
-  myLibrary.push(new Book(...values));
+  // container.innerHTML = "";
 
-  myLibrary.map((item) => {
-    let div = document.createElement("div");
-    div.classList.add("grid-item");
-    console.log("ooo", div);
-    div.textContent = item.title;
-    document.querySelector(".grid-container").appendChild(div);
-  });
+  e.preventDefault();
+  document.querySelectorAll(".inp").forEach((item) => values.push(item.value));
+  values.push(document.querySelector("input[type='checkbox']").checked);
+  console.log("values", values);
+  let kitab = new Book(...values);
+  myLibrary.push(kitab);
+  values = [];
   document.getElementById("myForm").reset();
+  let div = document.createElement("div");
+  div.classList.add("grid-item");
+  console.log("ooo", div);
+  div.textContent = kitab.title;
+  document.querySelector(".grid-container").appendChild(div);
+  // myLibrary.map((item) => {
+  //   let div = document.createElement("div");
+  //   div.classList.add("grid-item");
+  //   console.log("ooo", div);
+  //   div.textContent = item.title;
+  //   document.querySelector(".grid-container").appendChild(div);
+  // });
 }
 
 document
