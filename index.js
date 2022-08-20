@@ -1,6 +1,7 @@
 var popover = document.querySelector(".popover");
 var popoverTrigger = document.querySelector(".popover__trigger");
 var form = document.getElementById("myForm");
+var content = document.querySelector(".content");
 
 popoverTrigger.addEventListener("click", function (event) {
   closeAllOthers(this.parentElement);
@@ -15,9 +16,7 @@ function closeAllOthers(ignore) {
   }
 }
 
-let myLibrary = [
-  { title: "The Slight Edge", author: "Jeff Olsen", pages: "500", read: true },
-];
+let myLibrary = [];
 
 let myLibraryNodes = [];
 
@@ -36,63 +35,68 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`;
 };
 
-// myLibrary.map((item) => {
-//   let div = document.createElement("div");
-//   div.classList.add("grid-item");
-//   console.log("ooo", div);
-//   div.textContent = item.title;
-//   document.querySelector(".grid-container").appendChild(div);
-// });
+function removeBookFromLibrary(e, index) {
+  document.querySelector(".grid-container").remove();
+  myLibrary.splice(index, 1);
+  let gridContainer = document.createElement("div");
+  gridContainer.classList.add("grid-container");
+  myLibrary.forEach((book) => gridContainer.appendChild(book));
+  let content = document.querySelector(".content");
+  content.appendChild(gridContainer);
+  //console.log("salaam-e", e);
+}
 
-function generateCard(kitab) {
-  let div = document.createElement("div");
-  div.classList.add("grid-item");
+function generateCard(kitab, index) {
+  let card = document.createElement("div");
+  card.classList.add("grid-item");
+  card.setAttribute("data", index);
 
   let bookName = document.createElement("p");
   bookName.textContent = kitab.title;
-  div.appendChild(bookName);
+  card.appendChild(bookName);
 
   let Author = document.createElement("p");
   Author.textContent = kitab.author;
-  div.appendChild(Author);
+  card.appendChild(Author);
 
   let pages = document.createElement("p");
   pages.textContent = kitab.pages;
-  div.appendChild(pages);
+  card.appendChild(pages);
 
   let readBtn = document.createElement("button");
   readBtn.textContent = kitab.read ? "read" : "not read";
-  div.appendChild(readBtn);
+  card.appendChild(readBtn);
 
   let removeBtn = document.createElement("button");
+  removeBtn.addEventListener("click", (e) => removeBookFromLibrary(e, index));
+  removeBtn.classList.add("remove-btn");
   removeBtn.textContent = "remove";
-  div.appendChild(removeBtn);
-
-  document.querySelector(".grid-container").appendChild(div);
+  card.appendChild(removeBtn);
+  return card;
+  //document.querySelector(".grid-container").appendChild(card);
 }
 
-let values = [];
 function addBookToLibrary(e) {
+  let values = [];
   e.preventDefault();
   document.querySelectorAll(".inp").forEach((item) => values.push(item.value));
   values.push(document.querySelector("input[type='checkbox']").checked);
   console.log("values", values);
   let kitab = new Book(...values);
-  myLibrary.push(kitab);
-  values = [];
-
-  document.getElementById("myForm").reset();
-  generateCard(kitab);
-
-  // myLibrary.map((item) => {
-  //   let div = document.createElement("div");
-  //   div.classList.add("grid-item");
-  //   console.log("ooo", div);
-  //   div.textContent = item.title;
-  //   document.querySelector(".grid-container").appendChild(div);
-  // });
+  //myLibrary.push(kitab);
+  form.reset();
+  let card = generateCard(kitab, myLibrary.length);
+  myLibrary.push(card);
+  console.log("cards", myLibrary);
+  document.querySelector(".grid-container").appendChild(card);
 }
 
 document
   .querySelector("#formSent")
   .addEventListener("click", (e) => addBookToLibrary(e));
+
+// document
+//   .querySelectorAll(".remove-btn")
+//   .forEach((item) =>
+//     item.addEventListener("click", (e) => removeBookFromLibrary(e))
+//   );
