@@ -46,7 +46,25 @@ Book.prototype.info = function () {
 //   content.insertBefore(gridContainer, footer);
 // }
 
-function updateReadBook(e) {}
+function updateReadBook(e, kitab) {
+  myLibrary.map((elm) => {
+    if (
+      elm.dataset.indexNumber === e.target.parentElement.dataset.indexNumber
+    ) {
+      if (elm.querySelector(".read-btn").textContent === "read") {
+        elm.querySelector(".read-btn").textContent = "not read";
+      } else {
+        elm.querySelector(".read-btn").textContent = "read";
+      }
+    }
+  });
+
+  if (e.target.textContent === "read") {
+    e.textContent = "not read";
+  } else {
+    e.textContent = "read";
+  }
+}
 
 function removeBookFromLibrary(e) {
   document.querySelector(".grid-container").remove();
@@ -79,11 +97,14 @@ function generateCard(kitab, index) {
   card.appendChild(pages);
 
   let readBtn = document.createElement("button");
+  readBtn.addEventListener("click", (e) => updateReadBook(e, kitab));
+  readBtn.classList.add("read-btn");
+  readBtn.value = kitab.read;
   readBtn.textContent = kitab.read ? "read" : "not read";
   card.appendChild(readBtn);
 
   let removeBtn = document.createElement("button");
-  removeBtn.addEventListener("click", (e) => removeBookFromLibrary(e, index));
+  removeBtn.addEventListener("click", (e) => removeBookFromLibrary(e));
   removeBtn.classList.add("remove-btn");
   removeBtn.textContent = "remove";
   card.appendChild(removeBtn);
