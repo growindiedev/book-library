@@ -42,8 +42,8 @@ function removeBookFromLibrary(e, index) {
   gridContainer.classList.add("grid-container");
   myLibrary.forEach((book) => gridContainer.appendChild(book));
   let content = document.querySelector(".content");
-  content.appendChild(gridContainer);
-  //console.log("salaam-e", e);
+  let footer = document.querySelector(".footer");
+  content.insertBefore(gridContainer, footer);
 }
 
 function generateCard(kitab, index) {
@@ -73,7 +73,6 @@ function generateCard(kitab, index) {
   removeBtn.textContent = "remove";
   card.appendChild(removeBtn);
   return card;
-  //document.querySelector(".grid-container").appendChild(card);
 }
 
 function addBookToLibrary(e) {
@@ -83,7 +82,6 @@ function addBookToLibrary(e) {
   values.push(document.querySelector("input[type='checkbox']").checked);
   console.log("values", values);
   let kitab = new Book(...values);
-  //myLibrary.push(kitab);
   form.reset();
   let card = generateCard(kitab, myLibrary.length);
   myLibrary.push(card);
@@ -94,9 +92,3 @@ function addBookToLibrary(e) {
 document
   .querySelector("#formSent")
   .addEventListener("click", (e) => addBookToLibrary(e));
-
-// document
-//   .querySelectorAll(".remove-btn")
-//   .forEach((item) =>
-//     item.addEventListener("click", (e) => removeBookFromLibrary(e))
-//   );
