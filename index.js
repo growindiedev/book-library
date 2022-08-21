@@ -35,21 +35,36 @@ Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, not read yet`;
 };
 
-function removeBookFromLibrary(e, index) {
+// function removeBookFromLibrary(e, index) {
+//   document.querySelector(".grid-container").remove();
+//   myLibrary.splice(index, 1);
+//   let gridContainer = document.createElement("div");
+//   gridContainer.classList.add("grid-container");
+//   myLibrary.forEach((book) => gridContainer.appendChild(book));
+//   let content = document.querySelector(".content");
+//   let footer = document.querySelector(".footer");
+//   content.insertBefore(gridContainer, footer);
+// }
+
+function updateReadBook(e) {}
+
+function removeBookFromLibrary(e) {
   document.querySelector(".grid-container").remove();
-  myLibrary.splice(index, 1);
+  myLibrary = myLibrary.filter(
+    (elm) =>
+      elm.dataset.indexNumber !== e.target.parentElement.dataset.indexNumber
+  );
   let gridContainer = document.createElement("div");
   gridContainer.classList.add("grid-container");
   myLibrary.forEach((book) => gridContainer.appendChild(book));
   let content = document.querySelector(".content");
-  let footer = document.querySelector(".footer");
-  content.insertBefore(gridContainer, footer);
+  content.appendChild(gridContainer);
 }
 
 function generateCard(kitab, index) {
   let card = document.createElement("div");
   card.classList.add("grid-item");
-  card.setAttribute("data", index);
+  card.setAttribute("data-index-number", index);
 
   let bookName = document.createElement("p");
   bookName.textContent = kitab.title;
